@@ -1,50 +1,101 @@
-# Welcome to your Expo app 👋
+# Expo + NativeWind Starter Template
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A minimal, ready-to-use starter template for building React Native apps with [Expo Router](https://expo.github.io/router) and [NativeWind](https://www.nativewind.dev/) (Tailwind CSS for React Native).
 
-## Get started
+## Stack
 
-1. Install dependencies
+- [Expo](https://expo.dev) ~54 with New Architecture enabled
+- [Expo Router](https://expo.github.io/router) ~6 — file-based routing
+- [NativeWind](https://www.nativewind.dev/) v4 — Tailwind CSS utility classes in React Native
+- [React Native](https://reactnative.dev) 0.81
+- [TypeScript](https://www.typescriptlang.org/) ~5.9
+- React Compiler + Typed Routes enabled
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org) 18+
+- [Expo CLI](https://docs.expo.dev/more/expo-cli/): `npm install -g expo-cli`
+- For iOS: Xcode (macOS only)
+- For Android: Android Studio + emulator, or a physical device with [Expo Go](https://expo.dev/go)
+
+## Getting Started
+
+1. **Clone the repo**
+
+   ```bash
+   git clone https://github.com/<your-username>/<your-repo-name>.git
+   cd <your-repo-name>
+   ```
+
+2. **Install dependencies**
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Start the dev server**
 
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+   Then press:
+   - `a` — open Android emulator
+   - `i` — open iOS simulator
+   - `w` — open in browser
+   - Scan the QR code with [Expo Go](https://expo.dev/go) on your device
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+app/                  # File-based routes (Expo Router)
+  index.tsx           # Entry screen
+assets/               # Images, fonts, icons
+components/           # Shared components
+global.css            # Tailwind base styles (imported once)
+tailwind.config.js    # Tailwind / NativeWind config
+babel.config.js       # Babel config with NativeWind preset
+metro.config.js       # Metro config with NativeWind
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Using Tailwind Classes
 
-## Learn more
+NativeWind lets you use Tailwind utility classes directly on React Native components via the `className` prop:
 
-To learn more about developing your project with Expo, look at the following resources:
+```tsx
+import { View, Text } from "react-native";
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+export default function MyComponent() {
+  return (
+    <View className="flex-1 items-center justify-center bg-white">
+      <Text className="text-xl font-bold text-blue-500">Hello world</Text>
+    </View>
+  );
+}
+```
 
-## Join the community
+> **Important:** When you add new files that use Tailwind classes, make sure the file path is covered by the `content` array in `tailwind.config.js`. By default it covers `app/**/*` and `components/**/*`.
 
-Join our community of developers creating universal apps.
+## Adding a New Screen
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Create a file inside `app/` and it becomes a route automatically:
+
+```
+app/about.tsx   →   /about
+app/profile/index.tsx   →   /profile
+```
+
+## Scripts
+
+| Command | Description |
+|---|---|
+| `npm start` | Start the Expo dev server |
+| `npm run android` | Start on Android |
+| `npm run ios` | Start on iOS |
+| `npm run web` | Start on web |
+| `npm run lint` | Run ESLint |
+| `npm run reset-project` | Clear the app directory and start fresh |
+
+## License
+
+MIT
